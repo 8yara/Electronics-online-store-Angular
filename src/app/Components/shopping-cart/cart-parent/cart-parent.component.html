@@ -1,0 +1,52 @@
+<div class="mb-3">
+  <label for="" class="form-label">Client Name :</label>
+  <input [(ngModel)]="ClientName" type="text" class="form-control" name="" id="" >
+  Category<select [(ngModel)]="selectedCatID">
+    <option *ngFor="let Category of Categories " [value]="Category.id"><a class="dropdown-item" href="#">{{Category.Name}}</a></option>
+</select>
+<!-- here i have the cat id to send to the child -->
+ <app-cart-child  [receivedCatID]="selectedCatID"  (chosenItemsChanged)="onItemsChanged($event)"></app-cart-child>
+  <!-- (totalPriceChanged)="onTotalPriceChanged($event)" -->
+</div>
+
+
+<table class="table">
+  <thead class="thead-dark">
+      <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <!-- <th>Total Quantity</th> -->
+          <th>Price</th>
+          <th>Img</th>
+          <th></th>
+          <th>count</th>
+         
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let p of items">
+          <td>{{p.id}}</td>
+          <td>{{p.Name}}</td>
+          <!-- <td>
+              {{p.Quantity}}
+          </td> -->
+          <td>{{p.Price}}</td>
+          <div class="w-25">
+              <img class="img-fluid mx-auto d-block" [src]="p.img">
+          </div>
+        <td>
+          <input type="button" class="btn btn-danger" value="Remove" (click)="Remove(p.id,p.count,p.Price)">
+        </td>
+          <td>
+              <input [value]="p.count" type="number" class="form-control" name="" id="count" >
+          </td>
+      
+      
+      </tr>
+  </tbody>
+</table>
+<div [hidden]="!doneFlag">
+order Total price<h3>{{OrderTotalPrice}}</h3>
+
+</div>
+<input type="button" value="Done" (click)="Done()" class="btn btn-dark">

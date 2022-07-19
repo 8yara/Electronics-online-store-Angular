@@ -1,0 +1,53 @@
+<a name="" id="" class=" m-3 btn btn-primary" href="#" role="button" [routerLink]="['/admin/insertproduct']">Add New Product</a>
+<hr style="color: rgb(108, 47, 207); ">
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Img</th>
+            <th>Details</th>
+            <th>count</th>
+            <th>Add</th>
+            <th>Delete</th>
+            <!-- <th>Update</th> -->
+           
+        </tr>
+    </thead>
+    <tbody>
+        
+        <tr appProductCard *ngFor="let p of selecteditems;  let i=index" [hidden]="p.Quantity==0" [ngClass]="{'bg-warning':p.Quantity==1}">
+            <td>{{i+1}}</td>
+            <td>{{p.Name}}</td>
+            <td>
+                {{p.Quantity}}
+            </td>
+            <td>{{p.Price}}</td>
+            <div class="w-25">
+                <img class="img-fluid mx-auto d-block" [src]="p.img">
+            </div>
+            <!-- <td>
+                <input type="number" [value]="p.count">
+            </td>
+            <div>
+            <input  #itemsCount class="btn btn-outline-primary" type="button" value="Add to cart" (click)="buyFun(p.ID,p.count,p.Price)">
+
+            </div> -->
+            <td>
+                <a name="" id="" class="btn btn-success" [routerLink]="['/Product', p.id]" role="button">Details</a>
+               
+            <td>
+                <!-- Template variable -->
+                <input #itemsCount type="number" class="form-control" name="" id="count" [max]="p.Quantity" [min]="0">
+            </td>
+            <td><button type="button" class="btn btn-primary" (click)="buyFun(p.id,itemsCount.value,p.Price)">Buy</button></td>
+            <td><button type="button" class="btn btn-danger" (click)="deleteProduct(p.id)">Delete</button></td>
+            <!-- <td><button type="button" class="btn btn-warning" (click)="UpdateProduct(p.id)">Update</button></td> -->
+            
+        </tr>
+    </tbody>
+</table>
+
+<hr style="color: rgb(108, 47, 207); ">

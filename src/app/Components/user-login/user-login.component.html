@@ -1,0 +1,12 @@
+<div [hidden]="isLogged">
+    <div class="mb-3">
+      <label for="usrName" class="form-label"></label>
+      <input type="text" #name class="form-control" name="usrName" id="" placeholder="User Name">
+      <input type="password" #Pass class="form-control" name="Password" id="" placeholder="Password">
+
+
+    </div>
+</div>
+<button type="button" [disabled]="isLogged" class="btn btn-primary m-4" (click)="login()">Login</button>
+
+<button type="button" [disabled]="!isLogged"class="btn btn-secondary m-4" (click)="logout()">Logout</button>

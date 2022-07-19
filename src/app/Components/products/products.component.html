@@ -1,0 +1,86 @@
+
+<div class="d-flex justify-content-center">
+    <img [src]="Store.LogoUrl" alt="" class="img-fluid  d-block float-center" alt="Responsive image" width="100px">
+<h1>{{Store.Name}}</h1>
+</div>
+<div>
+<h6 class="text-danger" [hidden]="Discount=='No Discount' ">We offer an explicit dicount of :{{Discount}} </h6>
+
+Category<select (change)="selected($event)">
+    <option *ngFor="let Category of Categories"><a class="dropdown-item" href="#">{{Category.Name}}</a></option>
+</select>
+<div class="mb-3">
+    <label for="" class="form-label">Enter Your Name :</label>
+    <input [(ngModel)]="ClientName" type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+</div>
+<h6>Welcome: {{ClientName}}</h6>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<input type="button" class="btn btn-dark text-end" (click)="toggleCheckOut()" value="Checkout"><br>
+</div>
+<table class="table" *ngIf="!bought; else thanksBlock" style="border: 2px solide grey;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Img</th>
+            <th></th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        <tr  appProductCard *ngFor="let p of selecteditem" [hidden]="p.Quantity==0" [ngClass]="{'bg-warning':p.Quantity==1}">
+            <td>{{p.ID}}</td>
+            <td>{{p.Name}}</td>
+            <td>
+                {{p.Quantity}}
+            </td>
+            <td>{{p.Price}}</td>
+            <div class="w-25">
+                <img class="img-fluid mx-auto d-block" [src]="p.img">
+            </div>
+            <div>
+            <input class="btn btn-outline-primary" type="button" value="Buy" (click)="buyFun(p.ID)">
+
+            </div>
+    
+        </tr>
+    
+    </tbody>
+</table>
+<br>
+<ng-template #thanksBlock>
+    <h3 class="text-center text-dark">Thank you {{ClientName}} for buying from our store!</h3>
+    <div class="card" style="width: 30rem;">
+        <h5 class="text-info">Order Summary</h5>
+        <h6>Order Date: {{orderDate| date: 'mediumDate'}}</h6>
+        <h6> Total : {{totalPurchase| currency}}</h6>
+    </div>
+    <div class="card" style="width: 30rem">
+        
+        <h5 *ngIf="!donedata; else DoneBlock" >Please {{ClientName}} Complete your purchase data :</h5>
+        <ng-template #DoneBlock>
+            <h5 class="text-success">Enjoy Your Purchase !</h5><br>
+        </ng-template>
+        National ID: <input type="text" [(ngModel)]="NationalID">
+        <h5 [hidden]="!donedata">BirthDate : {{NationalID|idpipe}}</h5>
+        Credit Card Number: <input type="text" [(ngModel)]="CreditCard">
+        <h5 [hidden]="!donedata">Card No. : {{CreditCard|creditpipe}}</h5>
+        <input type="button" class="btn btn-dark text-white" value="Done" (click)="Done()">
+        
+    </div>
+</ng-template>
+</div>
+
+
+<!-- <div>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+</div> -->

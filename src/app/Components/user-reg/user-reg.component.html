@@ -1,0 +1,93 @@
+<form [formGroup]="registerFormGroup" (ngSubmit)="register()">
+    <div class=" mb-3 ">
+        <label for="uName" class="form-label ">Full name</label>
+        <input type="text" formControlName="fullName" class="form-control" id="uName " name="name " [class.is-invalid]="fullName?.invalid " [class.is-valid]="fullName?.valid ">
+        <div [hidden]="fullName?.valid || fullName?.untouched ">
+            <div class="alert alert-warning" *ngIf="fullName?.errors?.['required']"> Name can't be empty</div>
+            <div class="alert alert-warning" *ngIf="fullName?.errors?.['minlength']"> Name must be {{fullName?.errors?.['minlength'].requiredLength}} characters at least</div>
+            <div class="alert alert-warning" *ngIf="fullName?.errors?.['forbiddenName']"> {{fullName?.errors?.['forbiddenName'].value}} 'isn't allowed in full name'</div>
+
+        </div>
+
+    </div>
+    <div class="mb-3 ">
+        <label for="uEmail " class="form-label ">Email</label>
+        <input type="email " formControlName="email" class="form-control " id="uEmail " name="email" [class.is-invalid]="email?.invalid" [class.is-valid]="email?.valid">
+        <div [hidden]="email?.valid || email?.untouched ">
+            <div class="alert alert-warning" *ngIf="email?.errors?.['required']"> Email can't be empty</div>
+        </div>
+    </div>
+
+    <div class="mb-3 ">
+        <div class="ms-2" formArrayName="mobileNumbers" *ngFor="let item of mobileNumbers.controls; let i=index">
+            <label for="uMobile " class="form-label ">Mobile Number</label>
+            <div [hidden]="mobileNumbers?.valid || mobileNumbers?.untouched ">
+                <div class="alert alert-warning" *ngIf="mobileNumbers?.errors?.['maxLength']">Mobile should be 11 number</div>
+               
+            </div>
+            <input type="text " [formControlName]="i" class="form-control">
+        </div>
+        <button type="button" class="btn btn-secondary d-block ms-auto" (click)="addMobileNoInput()">+</button>
+        <button type="button" class="btn btn-danger d-block ms-auto" (click)="RemoveMobileNoInput()">-</button>
+
+
+    </div>
+    <div formGroupName="address">
+        <h3>Address</h3>
+        <div class="mb-3 ">
+            <label for="uCity" class="form-label ">City</label>
+            <input type="text" formControlName="city" class="form-control " id="uCity " name="city ">
+        </div>
+        <div class="mb-3 ">
+            <label for="uZipCode" class="form-label ">Zip Code</label>
+            <input type="number" formControlName="zipCode" class="form-control " id="uZipCode " name="ZipCode ">
+        </div>
+        <div class="mb-3 ">
+            <label for="uStreet" class="form-label ">Street</label>
+            <input type="text" formControlName="street" class="form-control " id="uStreet " name="Street ">
+        </div>
+    </div>
+    <div class="mb-3 ">
+        <label for="uPass" class="form-label ">Password</label>
+        <input type="password" formControlName="password" class="form-control " id="uPass " name="pass ">
+        <div [hidden]="password?.valid || password?.untouched ">
+            <div class="alert alert-warning" *ngIf="password?.errors?.['required']"> Enter Password</div>
+        </div>
+    </div>
+    <div class="mb-3 ">
+        <label for="uConfPass" class="form-label ">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control " id="uConfPass " name="conf-pass ">
+    </div>
+
+    <div class="btn-group d-block m-3" role="group" aria-label="Basic radio toggle button group">
+        Delivery Options:
+        <input type="radio" class="btn-check" formControlName="DeleviryOptions" (change)="updateValidation()" name="DeleviryOptions" id="btnradio1" value="2" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="btnradio1">Any Day</label>
+
+        <input type="radio" class="btn-check" formControlName="DeleviryOptions" (change)="updateValidation()" name="DeleviryOptions" id="btnradio3" value="1" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio3">Specific Day</label>
+        <div class="mb-3" *ngIf="DeleviryOptions?.value==1">
+            <label for="reachedThrough" class="form-label ">please specify:</label>
+            <input type="text" formControlName="DeleviryOptionsExp" class="form-control " id="reachedThrough" name="reachedTh">
+        </div>
+    </div>
+
+    <button [disabled]="registerFormGroup.invalid " type="submit " class="btn btn-primary ">Register</button>
+</form>
+<br>
+<hr>
+<!-- <div>
+    <h3>[To be removed] </h3>
+    <div>Testing Values:
+        <div>Form:{{registerFormGroup.value | json}}</div>
+        <div>Validation: {{registerFormGroup.get('password')?.errors | json}}
+            <br>Form errors: {{registerFormGroup.errors | json}}
+        </div>
+    </div> -->
+
+
+    <!-- <div>
+        <button type="button" class="btn btn-primary" (click)="fillForm()">Fill Form</button>
+    </div> -->
+
+<!-- </div>  -->

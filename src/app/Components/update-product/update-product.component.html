@@ -1,0 +1,30 @@
+<!-- <<button type="button" class="btn btn-primary" (click)="insertProduct()">Save</button>
+<form #prdFrm="ngForm" (ngSubmit)="update()">
+    <div class="mb-3">
+        <label for="prdName" class="form-label">Name</label>
+        <input #prd="ngModel" type="text" class="form-control" id="Name" name="name" [(ngModel)]="prd?.Name" required>
+        <div class="alert alert-warning" [hidden]="inpPrdName.valid || inpPrdName.untouched">Product Name can't be empty</div>
+    </div>
+    <div class="mb-3">
+        <label for="prdPrice" class="form-label">Price</label>
+        <input type="number" class="form-control" id="prdPrice" name="price" [(ngModel)]="newPrd.price" min="1" max="9999" required>
+    </div>
+    <div class="mb-3">
+        <label for="prdQuant" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="prdQuant" name="quantity" [(ngModel)]="newPrd.Quantity" min="0" max="999" required>
+    </div>
+    <div class="mb-3">
+        <label for="catList" class="form-label">Category</label>
+        <select class="form-control" name="cat" id="catList" [(ngModel)]="newPrd.cateogryID">
+            <option *ngFor="let cat of categorylst" [value]="cat.id">{{cat.Name}}</option>
+        </select>
+    </div>
+     <div class="mb-3">
+        <label for="prdImg" class="form-label">Image</label>
+        <input type="file" class="form-control" id="prdImg" name="image" [(ngModel)]="newPrd.Img"> -->
+    <!-- </div> 
+<button  type="submit" class="btn btn-primary">Update</button>
+    
+
+</form>   --> -->
+<h1>hii</h1>

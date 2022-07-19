@@ -1,0 +1,39 @@
+<table class="table" style="border: 2px solide grey;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Number</th>
+            <th>city</th>
+            <th>ZipCode</th>
+            <th>street</th>
+            <th>Delete</th>
+
+            
+            
+
+           
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let p of UserList">
+            <td>{{p.id}}</td>
+            <td>{{p.fullName}}</td>
+            <td>
+                {{p.email}}
+            </td>
+            <td >{{p.mobileNumber}}</td>
+            <td>{{p.address.city}}</td>
+            <td>{{p.address.zipCode}}</td>
+            <td>{{p.address.street}}</td>
+            <td>{{p.address.street}}</td>
+            <td><button type="button" class="btn btn-danger" (click)="Delete(p.id)">Delete</button></td>
+
+
+           
+    
+        </tr>
+    
+    </tbody>
+</table>
